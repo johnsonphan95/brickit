@@ -1,0 +1,9 @@
+#background-canvas{
+    /* background: black; */
+    /* background-image: url("./dist/images/grass00.png"); */
+    height: 700px;
+    width: 700px;
+    z-index: -1;
+    position: absolute;
+    filter: brightness(30%)
+}
