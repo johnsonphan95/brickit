@@ -66,7 +66,7 @@ class Game {
     
     draw(ctx){
         ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "grey";
         ctx.fillRect(GAME_WIDTH, GAME_HEIGHT, -GAME_WIDTH, -GAME_HEIGHT);
         this.paddle.draw(ctx);
         this.ball.draw(ctx);
