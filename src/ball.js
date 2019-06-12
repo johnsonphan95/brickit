@@ -1,9 +1,11 @@
 import { SPEED, GAME_WIDTH, GAME_HEIGHT, PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_MARGIN_BOTTOM, BALL_RADIUS } from './constants';
 
 class Ball {
-    constructor() {
-        this.x = (GAME_WIDTH / 2);
-        this.y = GAME_HEIGHT - PADDLE_HEIGHT - PADDLE_MARGIN_BOTTOM - BALL_RADIUS;
+    constructor(x, y) {
+        // this.x = (GAME_WIDTH / 2);
+        // this.y = GAME_HEIGHT - PADDLE_HEIGHT - PADDLE_MARGIN_BOTTOM - BALL_RADIUS;
+        this.x = x; 
+        this.y = y;
         this.radius = BALL_RADIUS;
         this.speed = SPEED; 
         this.dx = SPEED * (Math.random() * 2 - 1)

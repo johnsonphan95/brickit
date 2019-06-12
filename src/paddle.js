@@ -6,14 +6,15 @@ class Paddle {
         this.x = (GAME_WIDTH/2) - (PADDLE_WIDTH/2);
         this.y = GAME_HEIGHT - PADDLE_HEIGHT - PADDLE_MARGIN_BOTTOM;
         this.height = PADDLE_HEIGHT; 
-        this.width = PADDLE_WIDTH
+        this.width = PADDLE_WIDTH;
+        this.color = "rgba(255, 5, 5)"
         // this.inBounds = this.inBounds.bind(this);
     }
 
     draw(ctx){
-        ctx.shadowColor = "rgba(5, 255, 255)";
+        ctx.shadowColor = this.color;
         ctx.shadowBlur = 5; 
-        ctx.fillStyle = "rgba(5, 255, 255)"; 
+        ctx.fillStyle = this.color; 
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
