@@ -9,38 +9,23 @@ class Ball {
         this.dx = SPEED * (Math.random() * 2 - 1)
         this.dy = -SPEED; 
         this.status = true; 
-        // this.inBounds = this.inBounds.bind(this);
+        this.color = "rgba(5, 255, 255)"
     }
 
     draw(ctx) {
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 10; 
         ctx.beginPath(); 
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = this.color;
         ctx.fill();
         ctx.closePath();
     }
 
     move() {
-        // this.inBounds();
         this.x += this.dx; 
         this.y += this.dy;
-        // console.log(this.x, this.y)
     }
-
-    // inBounds() {
-    //     let x = this.x;
-    //     let y = this.y;
-    //     let dx = this.dx; 
-    //     let dy = this.dy;
-    //     let radius = this.radius; 
-    //     if (x + radius > GAME_WIDTH || x - radius < 0){
-    //         this.dx = -dx;
-    //     }
-    //     if (y - radius < 0){
-    //         this.dy = -dy;
-    //     }
-    // }
-
 
     resetBall(){
         this.x = (GAME_WIDTH / 2);
@@ -49,7 +34,6 @@ class Ball {
         this.dy = -SPEED;
     }
 
-    
 }
 
 

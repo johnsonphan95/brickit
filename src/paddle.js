@@ -11,10 +11,10 @@ class Paddle {
     }
 
     draw(ctx){
-        ctx.fillStyle = "orange"; 
-        ctx.fillRect(this.x, this.y, this.width, this.height)
-        ctx.strokeStyle = "blue";
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
+        ctx.shadowColor = "rgba(5, 255, 255)";
+        ctx.shadowBlur = 5; 
+        ctx.fillStyle = "rgba(5, 255, 255)"; 
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
     move(){
@@ -22,32 +22,13 @@ class Paddle {
         this.y = this.y + this.vel[1];
     }
 
-    // inBounds() {
-    //     let posX = this.pos[0];
-    //     let posY = this.pos[1];
-    //     if (posX < 0) {
-    //         this.pos[0] = 0;
-    //         this.removeVel();
-    //     } else if (posX > GAME_WIDTH - 35) {
-    //         this.pos[0] = GAME_WIDTH - 35;
-    //         this.removeVel();
-    //     } else if (posY > GAME_HEIGHT - 50) {
-    //         this.pos[1] = GAME_HEIGHT - 50;
-    //         this.removeVel();
-    //     } else if (posY < 0) {
-    //         this.pos[1] = 0;
-    //         this.removeVel();
-    //     }
-    // }
 
     setVel(vel){
-        vel = [vel[0] * SPEED * 2, vel[1] * SPEED * 2]
+        vel = [vel[0] * SPEED , vel[1] * SPEED ]
         this.vel = vel;
     }
 
-    removeVel(){
-        // vel = [vel[0] * SPEED, vel[1] * SPEED]
-        // this.vel = [this.vel[0] - vel[0], this.vel[1] - vel[1]]; 
+    removeVel(){ 
         this.vel = [0, 0];
     }
 

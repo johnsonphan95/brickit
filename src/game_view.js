@@ -15,7 +15,6 @@ export default class GameView {
     }
 
     start() {
-            // this.game.addObjects();
             setInterval(() => {
                 this.game.draw(this.ctx)
                 this.game.moveObjects()
@@ -37,6 +36,18 @@ export default class GameView {
                 this.paddle.setVel(this.moving[this.moving.length - 1]);
                 this.keyDown[KEY.D] = true;
                 break;
+            case KEY.LEFT: 
+                this.moving.push(MOVES.LEFT)
+                console.log(this.moving)
+                this.paddle.setVel(this.moving[this.moving.length - 1]);
+                this.keyDown[KEY.LEFT] = true;
+                break;
+            case KEY.RIGHT: 
+                this.moving.push(MOVES.RIGHT)
+                console.log(this.moving)
+                this.paddle.setVel(this.moving[this.moving.length - 1]);
+                this.keyDown[KEY.RIGHT] = true;
+                break;
         }
     }
 
@@ -51,6 +62,16 @@ export default class GameView {
                 this.moving = this.moving.filter(arr => arr.join("") !== MOVES.RIGHT.join(""));
                 console.log(this.moving)
                 this.keyDown[KEY.D] = false; 
+                break;
+            case KEY.LEFT:
+                this.moving = this.moving.filter(arr => arr.join("") !== MOVES.LEFT.join(""));
+                console.log(this.moving)
+                this.keyDown[KEY.LEFT] = false; 
+                break;
+            case KEY.RIGHT: 
+                this.moving = this.moving.filter(arr => arr.join("") !== MOVES.RIGHT.join(""));
+                console.log(this.moving)
+                this.keyDown[KEY.RIGHT] = false; 
                 break;
             }
         if (this.moving.length != 0) {

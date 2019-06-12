@@ -2,7 +2,7 @@ import Paddle from './paddle';
 import Ball from './ball';
 import Brick from './brick';
 import Particle from './particle';
-import {SPEED, GAME_HEIGHT, GAME_WIDTH, BRICK_WIDTH, BRICK_HEIGHT} from './constants';
+import {SPEED, GAME_HEIGHT, GAME_WIDTH, BRICK_WIDTH, BRICK_HEIGHT, BRICK_MARGIN_TOP} from './constants';
 // import Creep from './creep';
 
 class Game {
@@ -13,11 +13,11 @@ class Game {
         this.bricks = [];
         this.particles = [];
         this.lives = 3; 
-        this.level = 1; 
+        this.level = 2; 
         this.levels = {
             1: {r: 5, c: 8}, 
-            2: {r: 4, c: 8}, 
-            3: {r: 6, c: 8}
+            2: {r: 8, c: 8}, 
+            3: {r: 10, c: 8}
         };
         // this.lose = false; 
         this.addBricks();
@@ -38,13 +38,13 @@ class Game {
             this.bricks[r] = [];    
             for (let c = 0; c < col; c++){
                 this.bricks[r][c] = [];
-                this.bricks[r][c] = new Brick({ x: 50 + c * (BRICK_WIDTH), y: 50 + r * BRICK_HEIGHT})
+                this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10) , y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5)})
             }
         }
     }
 
     addParticles(ball){
-        for (let i = 0; i < 12; i++){
+        for (let i = 0; i < 6; i++){
             this.particles.push(new Particle(ball))
         }
         console.log(this.particles)
@@ -66,8 +66,15 @@ class Game {
     
     draw(ctx){
         ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-        ctx.fillStyle = "grey";
+        ctx.fillStyle = "black";
         ctx.fillRect(GAME_WIDTH, GAME_HEIGHT, -GAME_WIDTH, -GAME_HEIGHT);
+        ctx.lineWidth = 10;
+        // ctx.strokeStyle = "rgba(5, 255, 255)";
+        // ctx.shadowColor = "rgba(5, 255, 255)"; 
+        // ctx.shadowBlur = 5; 
+        // ctx.strokeRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        // ctx.lineWidth = 2;
+        // ctx.shadowBlur = 0;
         this.paddle.draw(ctx);
         this.ball.draw(ctx);
         this.bricks.forEach(row => { row.forEach(brick => brick.draw(ctx)) });
@@ -84,10 +91,16 @@ class Game {
         let dx = this.ball.dx;
         let dy = this.ball.dy;
         let radius = this.ball.radius;
-        if (x + radius > GAME_WIDTH || x - radius < 0) {
+        if (x + radius > GAME_WIDTH) {
+            this.ball.x = GAME_WIDTH - radius;
+            this.ball.dx = -dx;
+        }
+        if (x - radius < 0){
+            this.ball.x = radius;
             this.ball.dx = -dx;
         }
         if (y - radius < 0) {
+            this.ball.y = radius; 
             this.ball.dy = -dy;
         }
         if (y + radius > GAME_HEIGHT){
@@ -128,16 +141,17 @@ class Game {
         let row = this.levels[this.level].r;
         let col = this.levels[this.level].c;
         let ball = this.ball; 
+        let r = this.ball.radius;
 
 
         for (let r = 0; r < row; r++) {
             for (let c = 0; c < col; c++) {
                 let b = this.bricks[r][c];
-                if (b.status) {
+                if (b.status > 0 ) {
                     if (ball.x + ball.radius > b.x && ball.x - ball.radius < b.x + BRICK_WIDTH && ball.y + ball.radius > b.y && ball.y - ball.radius < b.y + BRICK_HEIGHT) {
                         ball.dy = - ball.dy;
                         this.addParticles(ball);
-                        b.status = false; 
+                        b.status -=1; 
                     }
                 }
             }
