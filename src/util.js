@@ -13,7 +13,6 @@ export const loadImages = (callback) => {
         img.onload = loaded;
         img.src = `dist/images/title/title${i}.png`;
         IMAGES.logo.push(img);
-        // debugger
     }
 
     // Once all images have been fully loaded, will initiate callback, which in this

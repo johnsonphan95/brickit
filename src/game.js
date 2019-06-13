@@ -15,8 +15,8 @@ class Game {
         this.level = 1; 
         this.levels = {
             1: {r: 5, c: 8}, 
-            2: {r: 1, c: 1}, 
-            3: {r: 1, c: 1}
+            2: {r: 6, c: 8}, 
+            3: {r: 7, c: 8}
         };
         this.score = 0;
         this.over = false; 
@@ -28,21 +28,51 @@ class Game {
         this.addParticles = this.addParticles.bind(this);
         this.removeParticles = this.removeParticles.bind(this);
         this.moveParticles = this.moveParticles.bind(this);
-        this.levelUp = this.levelUp.bind(this);
         this.update = this.update.bind(this);
         this.gameOver = this.gameOver.bind(this);
+        this.levelUp = this.levelUp.bind(this);
+        // this.anyBricks = this.anyBricks.bind(this);
     }
 
     addBricks(){
-         
+        console.log(this.level);
+        console.log(this.levels[this.level]);
         let row = this.levels[this.level].r; 
         let col = this.levels[this.level].c;
 
-        for (let r = 0; r < row; r++){
-            this.bricks[r] = [];    
-            for (let c = 0; c < col; c++){
-                this.bricks[r][c] = [];
-                this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10) , y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5)})
+        if (this.level === 1){
+            for (let r = 0; r < row; r++){
+                this.bricks[r] = [];    
+                for (let c = 0; c < col; c++){
+                    this.bricks[r][c] = [];
+                    this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10) , y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 1})
+                }
+            }
+        }
+        if (this.level === 2){
+            for (let r = 0; r < row; r++) {
+                this.bricks[r] = [];
+                for (let c = 0; c < col; c++) {
+                    this.bricks[r][c] = [];
+                    if (r % 2 === 0){
+                        this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10), y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 1 })
+                    } else {
+                        this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10), y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 2 })
+                    }
+                }
+            }
+        }
+        if (this.level === 3){
+            for (let r = 0; r < row; r++) {
+                this.bricks[r] = [];
+                for (let c = 0; c < col; c++) {
+                    this.bricks[r][c] = [];
+                    if (r === 3) {
+                        this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10), y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 3 })
+                    } else {
+                        this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10), y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 2 })
+                    }
+                }
             }
         }
     }
@@ -67,18 +97,21 @@ class Game {
         ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = "grey";
+        ctx.strokeRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
         ctx.shadowBlur = 0;
         ctx.beginPath();
-        ctx.arc(15, GAME_HEIGHT - 15, 8, 0, Math.PI * 2);
+        ctx.arc(470, GAME_HEIGHT - 15, 8, 0, Math.PI * 2);
         ctx.fillStyle = "rgba(5, 255, 255)";
         ctx.fill();
 
         ctx.fillStyle = "#FFF"; 
         ctx.font = "16px Monaco";
-        ctx.fillText(this.lives, 40, GAME_HEIGHT - 9);
+        ctx.fillText(this.lives, 490, GAME_HEIGHT - 8);
         ctx.fillStyle = "rgba(255, 255, 5)";
-        ctx.fillText(`SCORE: ${this.score}`, 100, GAME_HEIGHT - 9);
+        ctx.fillText(`SCORE: ${this.score}`, 55, GAME_HEIGHT - 9);
         this.ball.draw(ctx);
         this.bricks.forEach(row => { row.forEach(brick => brick.draw(ctx)) });
         this.paddle.draw(ctx);
@@ -156,7 +189,7 @@ class Game {
                             ball.dy = -ball.dy;
                         } 
                         b.status -= 1;
-                        this.score += 10;
+                        this.score += 20;
                         this.addParticles(ball);
                     }
                 }
@@ -164,22 +197,29 @@ class Game {
         }
     }
 
+
     levelUp(){
-        if (this.level <= Object.keys(this.levels).length){
+       if (this.level <= 3){
             let row = this.levels[this.level].r;
             let col = this.levels[this.level].c;
-        
+
             for (let r = 0; r < row; r++) {
                 for (let c = 0; c < col; c++) {
-                    let b = this.bricks[r][c]; 
-                    if (b.status > 0){
+                    let b = this.bricks[r][c];
+                    if (b.status > 0) {
                         return false;
                     }
                 }
             }
             this.level += 1;
-            return true;
-        } 
+            if (this.level > 3){
+                this.gameOver();
+            } else {
+                this.addBricks();
+                this.ball.resetBall(this.paddle.x + this.paddle.width / 2, this.paddle.y - this.ball.radius - 5);
+            }
+       }
+
     }
 
     gameOver(){
@@ -194,14 +234,10 @@ class Game {
         this.brickCollision();
         this.removeParticles();
         this.gameOver();
-        // this.gameWon();
+        this.levelUp();
     }
 
     moveObjects() {
-        // this.Bounds();
-        // this.paddleCollision();
-        // this.brickCollision();
-        // this.removeParticles();
         this.ball.move();
         this.paddle.move();
         this.moveParticles();

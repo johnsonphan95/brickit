@@ -39,7 +39,6 @@ class GameView {
                     that.game.draw(that.ctx);
                     that.game.step();
                     if (that.game.over === true) that.state = 'gameover';
-                    if (that.game.won === true) that.state = 'gamewon';
                     break;
                 case "gameover": 
                     that.gameOverScreen.draw(that.ctx, that.game.score);

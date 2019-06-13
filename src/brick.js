@@ -4,10 +4,10 @@ class Brick {
     constructor(options) {
         this.x = options.x; 
         this.y = options.y; 
+        this.status = options.status; 
         this.color = "rgba(255, 15, 255)";
         this.height = BRICK_HEIGHT;
         this.width = BRICK_WIDTH;
-        this.status = 2; 
         this.marginTop = 50; 
     }
 
@@ -23,6 +23,12 @@ class Brick {
             // ctx.strokeRect(this.x - 0.5, this.y - 0.5, this.width, this.height);
         } else if (this.status === 2){
             this.color = "rgba(15, 225, 15)"
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 5;
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        } else if (this.status === 3){
+            this.color = "rgba(5, 5, 255)"
             ctx.shadowColor = this.color;
             ctx.shadowBlur = 5;
             ctx.fillStyle = this.color;

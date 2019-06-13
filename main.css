@@ -2,15 +2,14 @@
     /* background: black; */
     /* background-image: url("./dist/images/grass00.png"); */
     height: 700px;
-    width: 700px;
+    width: 500px;
     z-index: -1;
     position: absolute;
-    filter: brightness(30%)
+    filter: brightness(30%);
 }
 
 #background{
     background-image: url("./dist/images/bg.jpg");
-    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/SRsQjwFQMjby34s1c/videoblocks-retro-futuristic-abstract-neon-outro-80s-vintage-vhs-tape-style-particle-landscape-vj-motion-digital-arcade-video-game-sci-fi-grid-fades-isolated-over-black-background-space-for-logo-4k-footage_h9htdknaf_thumbnail-full01.png");
     background-size: cover;
     height: 100vh;
     width: 100vw;

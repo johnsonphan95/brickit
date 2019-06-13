@@ -13,7 +13,7 @@ class titleScreen {
 
     draw(ctx, score) {
 
-        if (this.counter === 9) {
+        if (this.counter === 5) {
             ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
             ctx.fillStyle = "black";
             ctx.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
