@@ -1,4 +1,4 @@
-import { SPEED } from './constants';
+import { SPEED, SOUNDS } from './constants';
 
 class Particle {
     constructor(ball) {

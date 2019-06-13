@@ -2,7 +2,7 @@ import Paddle from './paddle';
 import Ball from './ball';
 import Brick from './brick';
 import Particle from './particle';
-import {SPEED, GAME_HEIGHT, GAME_WIDTH, BRICK_WIDTH, BRICK_HEIGHT, BRICK_MARGIN_TOP} from './constants';
+import { SPEED, GAME_HEIGHT, GAME_WIDTH, BRICK_WIDTH, BRICK_HEIGHT, BRICK_MARGIN_TOP} from './constants';
 
 class Game {
 
@@ -31,12 +31,9 @@ class Game {
         this.update = this.update.bind(this);
         this.gameOver = this.gameOver.bind(this);
         this.levelUp = this.levelUp.bind(this);
-        // this.anyBricks = this.anyBricks.bind(this);
     }
 
     addBricks(){
-        console.log(this.level);
-        console.log(this.levels[this.level]);
         let row = this.levels[this.level].r; 
         let col = this.levels[this.level].c;
 
@@ -78,7 +75,7 @@ class Game {
     }
 
     addParticles(ball){
-        for (let i = 0; i < 12; i++){
+        for (let i = 0; i < 6; i++){
             this.particles.push(new Particle(ball))
         }
     }
@@ -151,7 +148,7 @@ class Game {
     }
 
     paddleCollision(){
-        if (this.ball.x < this.paddle.x + this.paddle.width && this.ball.x > this.paddle.x && this.ball.y < this.paddle.y + this.paddle.height && this.ball.y + this.ball.radius > this.paddle.y) {
+        if (this.ball.x < this.paddle.x + this.paddle.width && this.ball.x > this.paddle.x && this.ball.y <= this.paddle.y + this.paddle.height && this.ball.y + this.ball.radius >= this.paddle.y) {
 
             // PLAY SOUND
 
@@ -167,6 +164,7 @@ class Game {
 
             this.ball.dx = Math.ceil(SPEED * Math.sin(angle));
             this.ball.dy = - Math.ceil(SPEED * Math.cos(angle));
+            // this.hit.play();
         }
     }
 

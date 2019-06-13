@@ -1,5 +1,5 @@
 import Game from './game';
-import {KEY, MOVES} from './constants';
+import {KEY, MOVES, SOUNDS} from './constants';
 import TitleScreen from './title_screen';
 import GameOverScreen from './game_over_screen';
 import * as Util from './util';
@@ -11,6 +11,7 @@ class GameView {
         this.paddle = this.game.paddle;
         this.titleScreen  = new TitleScreen();
         this.gameOverScreen = new GameOverScreen();
+        this.muted = false;
         this.keyDown = {};
         this.moving = [];
         this.state = "title";
@@ -19,17 +20,30 @@ class GameView {
         this.step = this.step.bind(this);
         document.addEventListener("keydown", this.handleKeyDown);
         document.addEventListener("keyup", this.handleKeyUp);
+        // this.playBGM = this.playBGM.bind(this);
+
     }
 
     start() {
-        Util.loadImages(() => {
-            requestAnimationFrame(this.step)
+        Util.loadContent(() => {
+            requestAnimationFrame(this.step);
         })
+        // this.playBGM();
     };
+
+    // playBGM(){
+    //     let bgmPlay = SOUNDS.sound[0].play(); 
+
+    //     if (bgmPlay !== undefined){
+    //         bgmPlay.then(_ => {
+
+    //         })
+    //     }
+    // }
 
     step(){
         let that = this;
-        let fps = 60;
+        let fps = 90;
         setTimeout(function(){
             switch(that.state){
                 case "title": 

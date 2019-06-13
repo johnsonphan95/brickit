@@ -11,6 +11,7 @@
 #background{
     background-image: url("./dist/images/bg.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
     height: 100vh;
     width: 100vw;
     position: absolute; 
@@ -23,6 +24,9 @@
     justify-content: center;
 }
 
-.body{
-    background: black;
+.sound{
+    color: white;
+    position: absolute;
+    right: 650px;
+    top: 800px;
 }
