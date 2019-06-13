@@ -29,10 +29,10 @@ class Ball {
         this.y += this.dy;
     }
 
-    resetBall(){
-        this.x = (GAME_WIDTH / 2);
-        this.y = GAME_HEIGHT - PADDLE_HEIGHT - PADDLE_MARGIN_BOTTOM - BALL_RADIUS;
-        this.dx = SPEED * (MATH.random() * 2 - 1)
+    resetBall(x, y){
+        this.x = x;
+        this.y = y;
+        this.dx = SPEED * (Math.random() * 2 - 1)
         this.dy = -SPEED;
     }
 

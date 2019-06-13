@@ -2,7 +2,8 @@ export const KEY = {
     A: 65, 
     D: 68, 
     LEFT: 37, 
-    RIGHT: 39
+    RIGHT: 39, 
+    ENTER: 13
 }
 
 export const MOVES = {
@@ -11,11 +12,15 @@ export const MOVES = {
     ZERO: [0, 0]
 }
 
+export const IMAGES = {
+    logo: []
+}
+
 export const SPEED = 7; 
 export const GAME_WIDTH = 500; 
 export const GAME_HEIGHT = 700;
 export const GAME_BG = "#141414";
-export const PADDLE_WIDTH = 100; 
+export const PADDLE_WIDTH = 75; 
 export const PADDLE_HEIGHT = 20;
 export const PADDLE_MARGIN_BOTTOM = 50; 
 export const BALL_RADIUS = 8; 

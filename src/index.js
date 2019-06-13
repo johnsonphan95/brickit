@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvasEl.height = GAME_HEIGHT;
     
     
-    const game = new Game(); 
-    new GameView(game, ctx).start();
+    // const game = new Game(); 
+    new GameView(ctx).start();
 })
 
