@@ -28,6 +28,7 @@ export const loadContent = (callback) => {
     // Once all images have been fully loaded, will initiate callback, which in this
     // case will be inside the start() function inside GameView
     function loaded() {
+        
         count++;
         if (count >= total) {
             callback();

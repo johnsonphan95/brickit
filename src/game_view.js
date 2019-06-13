@@ -9,6 +9,7 @@ class GameView {
         this.ctx = ctx;
         this.game = new Game();
         this.paddle = this.game.paddle;
+        this.bgm = new Audio('./dist/sounds/sound0.mp3');
         this.titleScreen  = new TitleScreen();
         this.gameOverScreen = new GameOverScreen();
         this.muted = false;
@@ -20,26 +21,13 @@ class GameView {
         this.step = this.step.bind(this);
         document.addEventListener("keydown", this.handleKeyDown);
         document.addEventListener("keyup", this.handleKeyUp);
-        // this.playBGM = this.playBGM.bind(this);
-
     }
 
     start() {
         Util.loadContent(() => {
-            requestAnimationFrame(this.step);
+            requestAnimationFrame(this.step)
         })
-        // this.playBGM();
     };
-
-    // playBGM(){
-    //     let bgmPlay = SOUNDS.sound[0].play(); 
-
-    //     if (bgmPlay !== undefined){
-    //         bgmPlay.then(_ => {
-
-    //         })
-    //     }
-    // }
 
     step(){
         let that = this;
@@ -75,7 +63,6 @@ class GameView {
         if (!this.game.over || !this.game.won){ 
             switch(e.keyCode){
                 case KEY.A: 
-                 
                     this.moving.push(MOVES.LEFT)
                     this.paddle.setVel(this.moving[this.moving.length - 1]);
                     this.keyDown[KEY.A] = true;
