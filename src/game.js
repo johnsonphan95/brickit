@@ -12,7 +12,7 @@ class Game {
         this.bricks = [];
         this.particles = [];
         this.lives = 3; 
-        this.level = 1; 
+        this.level = 3; 
         this.levels = {
             1: {r: 5, c: 8}, 
             2: {r: 6, c: 8}, 
@@ -66,8 +66,10 @@ class Game {
                     this.bricks[r][c] = [];
                     if (r === 3) {
                         this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10), y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 3 })
-                    } else {
+                    } else if (r === 0 || r == 2 || r == 4 || r == 6) {
                         this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10), y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 2 })
+                    } else  {
+                        this.bricks[r][c] = new Brick({ x: BRICK_WIDTH + 15 + c * (BRICK_WIDTH + 10), y: BRICK_MARGIN_TOP + r * (BRICK_HEIGHT + 12.5), status: 1 })
                     }
                 }
             }
