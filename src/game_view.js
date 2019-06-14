@@ -9,7 +9,7 @@ class GameView {
         this.ctx = ctx;
         this.game = new Game();
         this.paddle = this.game.paddle;
-        this.bgm = new Audio('./dist/sounds/sound0.mp3');
+        this.bgm = new Audio('./dist/sounds/sound3.mp3');
         this.titleScreen  = new TitleScreen();
         this.gameOverScreen = new GameOverScreen();
         this.muted = false;

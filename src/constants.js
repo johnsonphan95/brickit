@@ -17,9 +17,9 @@ export const IMAGES = {
     logo: []
 }
 
-export const SOUNDS = {
-    sound: []
-}
+// export const SOUNDS = {
+//     sound: []
+// }
 
 export const SPEED = 7; 
 export const GAME_WIDTH = 500; 

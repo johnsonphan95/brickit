@@ -9,6 +9,8 @@ class Game {
     constructor(){
         this.paddle = new Paddle();
         this.ball = new Ball(this.paddle.x + this.paddle.width/2, this.paddle.y - 10);
+        // this.brickSound = new Audio('./dist/sounds/sound2.mp3');
+        // this.paddleSound = new Audio('./dist/sounds/sound1.mp3');
         this.bricks = [];
         this.particles = [];
         this.lives = 3; 
@@ -77,7 +79,7 @@ class Game {
     }
 
     addParticles(ball){
-        for (let i = 0; i < 6; i++){
+        for (let i = 0; i < 9; i++){
             this.particles.push(new Particle(ball))
         }
     }
@@ -153,6 +155,7 @@ class Game {
         if (this.ball.x < this.paddle.x + this.paddle.width && this.ball.x > this.paddle.x && this.ball.y <= this.paddle.y + this.paddle.height && this.ball.y + this.ball.radius >= this.paddle.y) {
 
             // PLAY SOUND
+            // this.brickSound.play();
 
             // CHECK WHERE THE this.ball HIT THE this.paddle
             let collidePoint = this.ball.x - (this.paddle.x + this.paddle.width / 2);
@@ -166,7 +169,6 @@ class Game {
 
             this.ball.dx = Math.ceil(SPEED * Math.sin(angle));
             this.ball.dy = - Math.ceil(SPEED * Math.cos(angle));
-            // this.hit.play();
         }
     }
 
@@ -191,6 +193,7 @@ class Game {
                         b.status -= 1;
                         this.score += 20;
                         this.addParticles(ball);
+                        // this.paddleSound.play();
                     }
                 }
             }

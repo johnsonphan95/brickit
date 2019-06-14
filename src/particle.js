@@ -1,4 +1,4 @@
-import { SPEED, SOUNDS } from './constants';
+import { SPEED, GAME_WIDTH, GAME_HEIGHT} from './constants';
 
 class Particle {
     constructor(ball) {
@@ -27,6 +27,18 @@ class Particle {
     }
 
     move() {
+        if (this.x + this.radius > GAME_WIDTH) {
+            this.x = GAME_WIDTH - this.radius;
+            this.dx = -this.dx;
+        }
+        if (this.x - this.radius < 0) {
+            this.x = this.radius;
+            this.dx = -this.dx;
+        }
+        if (this.y - this.radius < 0) {
+            this.y = this.radius;
+            this.dy = -this.dy;
+        }
         this.dy -= 0.1;
         this.x += this.dx;
         this.y -= this.dy;
