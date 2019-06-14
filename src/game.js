@@ -12,7 +12,7 @@ class Game {
         this.bricks = [];
         this.particles = [];
         this.lives = 3; 
-        this.level = 3; 
+        this.level = 1; 
         this.levels = {
             1: {r: 5, c: 8}, 
             2: {r: 6, c: 8}, 
