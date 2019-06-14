@@ -46,7 +46,7 @@ class Game {
                 }
             }
         }
-        if (this.level === 2){
+        else if (this.level === 2){
             for (let r = 0; r < row; r++) {
                 this.bricks[r] = [];
                 for (let c = 0; c < col; c++) {
@@ -59,7 +59,7 @@ class Game {
                 }
             }
         }
-        if (this.level === 3){
+        else if (this.level === 3){
             for (let r = 0; r < row; r++) {
                 this.bricks[r] = [];
                 for (let c = 0; c < col; c++) {
@@ -187,7 +187,7 @@ class Game {
                         } 
                         else if ((ball.y + ball.radius >= b.y && ball.y - ball.radius <= b.y ) || (ball.y - ball.radius <= b.y + b.height && ball.y + ball.radius >= b.y + b.height)){
                             ball.dy = -ball.dy;
-                        } 
+                        }
                         b.status -= 1;
                         this.score += 20;
                         this.addParticles(ball);

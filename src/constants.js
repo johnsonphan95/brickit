@@ -3,7 +3,8 @@ export const KEY = {
     D: 68, 
     LEFT: 37, 
     RIGHT: 39, 
-    ENTER: 13
+    ENTER: 13, 
+    M: 77
 }
 
 export const MOVES = {

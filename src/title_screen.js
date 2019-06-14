@@ -49,6 +49,7 @@ class titleScreen {
             ctx.fillStyle = "rgba(255, 255, 255)";
             ctx.fillText("Break all the BRICKS", 250, 400);
             ctx.fillText("[A] [D] or [<] [>] to move LEFT RIGHT", 250, 550);
+            ctx.fillText("[M] to MUTE/UNMUTE sound", 250, 600);
             ctx.fillStyle = "";
             ctx.shadowBlur = "";
             ctx.closePath();

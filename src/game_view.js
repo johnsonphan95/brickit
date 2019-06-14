@@ -53,9 +53,17 @@ class GameView {
     handleKeyDown(e){
         if (e.repeat || this.keyDown[e.keyCode]) return; 
         if (e.keyCode === KEY.ENTER){
-            if (this.state === 'title' || this.state === 'gameover'){ 
+            if (this.state === 'title'){ 
                 this.state = "game"; 
                 this.game = new Game(); 
+                this.bgm.loop = true; 
+                this.bgm.volume = 0.5;
+                this.bgm.play();
+                this.paddle = this.game.paddle;
+                this.keyDown = {};
+            } else if (this.state === 'gameover'){
+                this.state = "game";
+                this.game = new Game();
                 this.paddle = this.game.paddle;
                 this.keyDown = {};
             }
@@ -82,6 +90,12 @@ class GameView {
                     this.paddle.setVel(this.moving[this.moving.length - 1]);
                     this.keyDown[KEY.RIGHT] = true;
                     break;
+                case KEY.M: 
+                    if (this.bgm.muted === false){
+                        this.bgm.muted = true
+                    } else { 
+                        this.bgm.muted = false;
+                    }
             }
         }
     }
